@@ -27,7 +27,7 @@ exports.scrapefun = function (req, res) {
             console.log($('.hidden-xs.show-print').eq(0).text());
             for(var i=0;i<$('.venuetitle').length;i++){
             	event={};
-            	event.id=i+100;
+            	event.id=i+400;
             	event.title=($('.venuetitle').eq(i).text());
             	event.time=($('.featureeventdatemobile.hidden-lg.hidden-md.hidden-sm').eq(i).text().replace(/\s\s+/g, '' ))+ " " +($('.eventtime').eq(i).text().substring(11));
             	event.description=($('.hidden-xs.show-print').eq(i).text());
@@ -61,7 +61,7 @@ exports.scrapefun1 = function (req, res) {
             console.log($('.eventtime').eq(0).text());
             for(var i=0;i<$('.venuetitle').length;i++){
             	event={};
-            	event.id=i+111;
+            	event.id=i+411;
             	event.title=($('.venuetitle').eq(i).text());
             	event.time=($('.featureeventdatemobile.hidden-lg.hidden-md.hidden-sm').eq(i).text().replace(/\s\s+/g, '' ))+ " " +($('.eventtime').eq(i).text().substring(11));
             	event.description=($('.hidden-xs.show-print').eq(i).text());
@@ -93,7 +93,7 @@ exports.scrapefun2 = function (req, res) {
             console.log($('.eventtime').eq(0).text());
             for(var i=0;i<$('.venuetitle').length;i++){
             	event={};
-            	event.id=i+121;
+            	event.id=i+421;
             	event.title=($('.venuetitle').eq(i).text());
             	event.time=($('.featureeventdatemobile.hidden-lg.hidden-md.hidden-sm').eq(i).text().replace(/\s\s+/g, '' ))+ " " +($('.eventtime').eq(i).text().substring(11));
             	event.description=($('.hidden-xs.show-print').eq(i).text());
@@ -163,7 +163,7 @@ exports.featureEventsMain = function (req, res) {
                 event.description=($('.ellipsis').eq(i).text());
                 event.url="http://www.sanjose.org"+($('.events-slider a').eq(i).attr('href'));
                 event.location="San Jose";
-                event.type="Featured Events";
+                event.type="FESJ";
 
                 event.time = event.time.replace(/\s\s+/g, ' ' );
                 event.image="http://www.sanjose.org"+($('.img-responsive.slider-event-img').eq(i).attr('src'));
@@ -217,7 +217,7 @@ exports.featureEvents = function (req, res) {
                 event.url="http://www.sanjose.org/events/";
                 event.url="http://www.sanjose.org"+($('.captiontitle a').eq(i).attr('href'));
                 event.location=($('.ic_category').eq(i).text());
-                event.type="Featured Events";
+                event.type="FESJ";
 
                 event.time = event.time.replace(/\s\s+/g, ' ' );
                 event.image="http://www.sanjose.org"+($('.feature-events-img img').eq(i).attr('src'));
@@ -233,13 +233,23 @@ exports.featureEvents = function (req, res) {
             mongo.connect(mongoURL, function(){
                 console.log('Connected to mongo at: ' + mongoURL);
                 var coll1 = mongo.collection('featuredEvents');
+                var coll2 = mongo.collection('techfunEvents');
                 coll1.insert(eventobj,(function(err, user){
                     if (!err) {
                         console.log("Details saved successfully  ");
                     } else {
                         console.log("returned false"+err);
                     }
-                }));
+                })); 
+                coll2.insert(eventobj,(function(err, user){
+        			if (!err) {
+        							
+        				console.log("Details saved successfully  ");
+
+        			} else {
+        				console.log("returned false"+err);
+        			}
+        		}));
 
             });  
 
@@ -331,7 +341,7 @@ exports.scrapeSF = function (req, res) {
         			}
         		}));
         		
-        	});
+        	}); 
 
           console.log(JSON.stringify(funeventsSF));
            res.render("scrapeSF", {

@@ -81,6 +81,12 @@
 
         </p>
       </div>
+      
+      <form action="/savefeaturedDetails" method="post" class="save">
+        <input type="hidden" id="eventid" name="eventid" value=<%=featuredEvent.id%>>
+        <input type="hidden" id="eventType" name="eventType" value=<%=featuredEvent.type%>>
+        <input type="submit" class="btn btn-info saveeventf" value="Save Event">
+      </form>
 
     </div>
   </div>
